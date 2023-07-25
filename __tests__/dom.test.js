@@ -70,19 +70,42 @@ describe("The document", () => {
     expect(cost).not.toBe(null);
   });
 
+  // everything above this is making sure the HTML is working as expected
+  // fixed while typing along to Megan's explanation
+
   // TODO: Complete this test case so it is testing the described behavior.
   test("displays the correct cost for the user's input values after clicking the calculate button", () => {
     const price = getByRole(document, "spinbutton", { name: /price/i });
+
+    //refills
+    const refills = getByRole(document, "spinbutton", {name: /refills/i });
+
     const subscribed = getByRole(document, "checkbox", {
       name: /subscribed/i,
     });
+
+    //coupon
+    const coupon = getByRole(document, "checkbox", {
+      name: /coupon/i,
+    });
+
     const calculateButton = getByRole(document, "button", {
       name: /calculate/i,
     });
 
+    //status is what the cost evaluates to after everything else executes
+    const cost = getByRole(document,"status");
+
+    price.value = 10;
+    refills.value = 2;
+    subscribed.checked = true;
+    coupon.checked = false;
+
     calculateButton.click();
 
     // TODO: Change this assertion to check the correct value.
-    expect(true).toBe(false);
+    // testing an output value for a string that should be in the innerHTML
+
+    expect(cost.textContent).toBe("$15.00");
   });
 });

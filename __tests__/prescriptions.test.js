@@ -76,3 +76,31 @@ describe("getTotalCost()", () => {
 });
 
 // TODO: Write tests for applyDiscount() and applyCoupon()
+
+// when applying the discount expect that for any total cost, the returned
+// value after applying the discount is 75% of the total cost (discount is 25%)
+// for example, if getTotalCost is 80, expect 60
+
+describe("applies discount correctly", () => {
+  it("returns discounted cost if subscription is checked", () => {
+    expect(applyDiscount(80,true)).toBe(60);
+  });
+  // it should not apply a discount if the subscription value is false
+  it("does not apply disount to cost if subscription is not checked", () => {
+    expect(applyDiscount(80,false)).toBe(80);
+  })
+})
+
+// when applying the coupon after calculating the cost after applying subscription
+// discount if applicable, expect that the final cost is costAfterSubscription
+// less $10; for example, if costAfterSubscription is 60, expect 50
+
+describe("applies coupon correctly", () => {
+  it("returns additional discount if coupon is checked", () => {
+    expect(applyCoupon(60,true)).toBe(50);
+  });
+  // it should not apply the coupon discount if the coupon value is false
+  it("does not apply additional discounts if coupon is not checked", () => {
+    expect(applyCoupon(60,false)).toBe(60);
+  })
+})
